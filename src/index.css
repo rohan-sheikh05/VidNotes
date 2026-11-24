@@ -1,0 +1,109 @@
+@import '@fontsource-variable/roboto';
+@import './tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Style: Flat Design with a familiar video-platform feel (design-system/vidnotes/MASTER.md, VidNotes overrides).
+ * No shadows or gradients; hierarchy comes from surface colour, borders and type weight.
+ * Components use semantic tokens only — never raw palette colours.
+ */
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-bg font-sans text-base leading-relaxed text-fg antialiased;
+  }
+  h1 {
+    @apply text-2xl font-bold leading-tight tracking-tight;
+  }
+  h2 {
+    @apply text-lg font-semibold leading-snug;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-bg;
+  }
+  kbd {
+    @apply rounded border border-fg-muted/40 px-1.5 font-sans text-xs font-medium;
+  }
+}
+
+@layer components {
+  /* Buttons — min 44px tall, colour-only press/hover states (no layout shift). */
+  .btn {
+    @apply inline-flex min-h-[44px] cursor-pointer select-none items-center justify-center gap-2 rounded-full px-5 py-2
+      font-medium transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-hover;
+  }
+  .btn-secondary {
+    @apply btn border border-border-strong bg-surface text-fg hover:bg-surface-2 active:bg-surface-2;
+  }
+  .btn-ghost {
+    @apply btn text-fg-muted hover:bg-surface-2 hover:text-fg active:bg-surface-2;
+  }
+  .btn-danger {
+    @apply btn bg-danger text-on-danger hover:bg-danger-hover active:bg-danger-hover;
+  }
+  .btn-icon {
+    @apply btn h-11 w-11 px-0;
+  }
+
+  /* Forms */
+  .input {
+    @apply min-h-[44px] w-full rounded-control border border-border-strong bg-surface px-3 py-2.5 text-base text-fg
+      placeholder:text-fg-muted/70 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/25;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-semibold text-fg;
+  }
+  .hint {
+    @apply text-sm text-fg-muted;
+  }
+  .error-text {
+    @apply flex items-center gap-1.5 text-sm font-medium text-danger;
+  }
+
+  /* Surfaces */
+  .panel {
+    @apply rounded-card border border-border bg-surface p-4;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-wider text-fg-muted;
+  }
+
+  /* Inline notices */
+  .notice {
+    @apply flex items-start gap-2 rounded-control px-3 py-2.5 text-sm;
+  }
+  .notice-warning {
+    @apply notice bg-warning-soft text-on-warning-soft;
+  }
+  .notice-info {
+    @apply notice bg-info-soft text-on-info-soft;
+  }
+  .notice-success {
+    @apply notice bg-primary-soft text-on-primary-soft;
+  }
+  .notice-danger {
+    @apply notice bg-danger-soft text-on-danger-soft;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
